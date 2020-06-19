@@ -53,3 +53,7 @@ ol, ul {
 .sort-button {
   margin-top: 14px;
 }
+
+.winner {
+  background-color: green;
+}
