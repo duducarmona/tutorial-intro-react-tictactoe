@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Square(props) {
   let winnerClass = '';
@@ -148,6 +150,18 @@ class Game extends React.Component {
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
     });
+
+    if (!squares.includes(null) && !calculateWinner(squares)) {
+      toast.info("It's a draw!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   }
 
   jumpTo(step) {
@@ -202,6 +216,16 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
+          <ToastContainer 
+            position="top-center"
+            autoClose={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <Board 
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
